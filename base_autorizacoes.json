@@ -1,0 +1,18 @@
+[
+    {
+        "nome_usuario": "leonardo",
+        "permissoes": {
+            "visualizar_relatorios": true,
+            "editar_usuarios": false,
+            "acesso_total": false
+        }
+    },
+    {
+        "nome_usuario": "arthur",
+        "permissoes": {
+            "visualizar_relatorios": true,
+            "editar_usuarios": true,
+            "acesso_total": true
+        }
+    }
+]
