@@ -1,18 +1,20 @@
 [
     {
-        "nome_usuario": "leonardo",
+        "nome_usuario": "Leonardo Stall",
         "permissoes": {
-            "visualizar_relatorios": true,
-            "editar_usuarios": false,
-            "acesso_total": false
+            "Cadastrar": true,
+            "Editar_usuarios": true,
+            "Excluir_usuarios": true,
+            "Visualizar_usuarios": true           
         }
     },
     {
-        "nome_usuario": "arthur",
+        "nome_usuario": "Arthur Oliveira",
         "permissoes": {
-            "visualizar_relatorios": true,
-            "editar_usuarios": true,
-            "acesso_total": true
+            "Cadastrar": true,
+            "Editar_usuarios": true,
+            "Excluir_usuarios": true,
+            "Visualizar_usuarios": true
         }
     }
 ]
