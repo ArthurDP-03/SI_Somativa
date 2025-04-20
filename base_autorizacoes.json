@@ -1,20 +1,42 @@
 [
     {
-        "nome_usuario": "Leonardo Stall",
+        "nome_usuario": "Arthur Oliveira",
         "permissoes": {
-            "Cadastrar": true,
+            "Cadastrar_usuarios": true,
             "Editar_usuarios": true,
             "Excluir_usuarios": true,
-            "Visualizar_usuarios": true           
+            "Visualizar_usuarios": true,
+            "Visualizar_autorizacoes_usuarios": true
         }
     },
     {
-        "nome_usuario": "Arthur Oliveira",
+        "nome_usuario": "Leonardo Stall",
         "permissoes": {
-            "Cadastrar": true,
+            "Cadastrar_usuarios": true,
             "Editar_usuarios": true,
             "Excluir_usuarios": true,
-            "Visualizar_usuarios": true
+            "Visualizar_usuarios": true,
+            "Visualizar_autorizacoes_usuarios": true
+        }
+    },
+    {
+        "nome_usuario": "admin",
+        "permissoes": {
+            "Cadastrar_usuarios": true,
+            "Editar_usuarios": true,
+            "Excluir_usuarios": true,
+            "Visualizar_usuarios": true,
+            "Visualizar_autorizacoes_usuarios": true
+        }
+    },
+    {
+        "nome_usuario": "admin2",
+        "permissoes": {
+            "Cadastrar_usuarios": false,
+            "Editar_usuarios": false,
+            "Excluir_usuarios": false,
+            "Visualizar_usuarios": true,
+            "Visualizar_autorizacoes_usuarios": false
         }
     }
 ]
