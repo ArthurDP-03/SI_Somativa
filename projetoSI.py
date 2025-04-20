@@ -1,4 +1,7 @@
 # Arthur de Oliveira e Leonardo Stall
+# Bem vindo professor Pedro! Para o senhor cadastrar novos usuários, 
+# basta usar o USUÁRIO: Pedro e a SENHA: admin.
+
 
 import json
 from getpass import getpass

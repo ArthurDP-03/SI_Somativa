@@ -20,7 +20,7 @@
         }
     },
     {
-        "nome_usuario": "admin",
+        "nome_usuario": "Pedro",
         "permissoes": {
             "Cadastrar_usuarios": true,
             "Editar_usuarios": true,
