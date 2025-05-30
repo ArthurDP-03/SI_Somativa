@@ -1,0 +1,2 @@
+
+    senha = getpass.getpass("Senha: ")

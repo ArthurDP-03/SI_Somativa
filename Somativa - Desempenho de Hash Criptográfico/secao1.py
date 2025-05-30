@@ -3,6 +3,7 @@
 import json
 from getpass import getpass
 import hashlib
+import os
     
 def MenuPrincipal():
     while True:
@@ -46,7 +47,7 @@ def AutenticarUsuario():
 
 def VerificarSenhaUsuario(usuario, senha):
         try:
-            with open("base_usuarios.json", "r") as arquivo_json:
+            with open("base_usuarios2.json", "r") as arquivo_json:
                 usuarios = json.load(arquivo_json)  # Carrega os usuários do arquivo JSON
 
                 # Verifica se o usuário e a senha correspondem
@@ -59,49 +60,41 @@ def VerificarSenhaUsuario(usuario, senha):
                 print("\n ⚠️  Usuário ou senha incorretos.") # retorno ambíguo para evitar possiveis casos de 'tenattiva e erro '
                 return False
         except FileNotFoundError:
-            print("\n❗ Erro: O arquivo 'base_usuarios.json' não foi encontrado.")
+            print("\n❗ Erro: O arquivo 'base_usuarios2.json' não foi encontrado.")
             return False
         except json.JSONDecodeError:
-            print("\n❗ Erro: O arquivo 'base_usuarios.json' está corrompido.")
+            print("\n❗ Erro: O arquivo 'base_usuarios2.json' está corrompido.")
             return False
 
 def CadastrarUsuario():
+    usuario = input("Digite seu usuário: ").strip()        
+    senha = getpass("Digite a sua senha: ").strip()
+
+    senha_hash = hashlib.sha256(senha.encode()).hexdigest()
+
+    # Caminho correto baseado na mesma pasta do script
+    caminho_arquivo = os.path.join(os.path.dirname(__file__), "base_usuarios2.json")
+
     try:
-        usuario = ""
-        senha = ""
-        while len(usuario) != 4:  
-            usuario = input("Digite seu usuário (4 caracteres): ").strip()
-            if len(usuario) != 4:
-                print("⚠️  O usuário deve ter 4 caracteres. Tente novamente.")  
-    
-        while len(senha) != 4:      
-            senha = getpass("Digite a sua senha (4 caracteres): ").strip()
-            if len(senha) != 4:
-                print("⚠️  A senha deve ter 4 caracteres. Tente novamente.")
-        
-        with open("base_usuarios.json", "r") as arquivo_json:
+        with open(caminho_arquivo, "r") as arquivo_json:
             usuarios = json.load(arquivo_json)
-            
-        # ve se o usuario está ja cadstrado na base de usuarios
-        if any(u["nome_usuario"] == usuario for u in usuarios):
-            print(f"❗ Erro: Usuário '{usuario}' já existe na base de usuários.")
-            return
+    except (FileNotFoundError, json.JSONDecodeError):
+        usuarios = []
 
-        novo_usuario = {
-            "nome_usuario": usuario,
-            "senha": senha
-        }   
+    if any(u["nome_usuario"] == usuario for u in usuarios):
+        print(f"! Erro: Usuário {usuario} já existe na base de dados.\n")
+        return
 
-        # insere na base de usuários
-        usuarios.append(novo_usuario)
-        with open("base_usuarios.json", "w") as arquivo_json:
-            json.dump(usuarios, arquivo_json, indent=4)
+    novo_usuario = {
+        "nome_usuario": usuario,
+        "senha": senha_hash
+    }
 
-        print(f"Usuário '{usuario}' cadastrado com sucesso!\n")
+    usuarios.append(novo_usuario)
 
-    except FileNotFoundError:
-        print("\n❗ Erro: O arquivo 'base_usuarios.json' não foi encontrado.")
-    except json.JSONDecodeError:
-        print("\n❗ Erro: O arquivo 'base_usuarios.json' está corrompido.")
+    with open(caminho_arquivo, "w") as arquivo_json:
+        json.dump(usuarios, arquivo_json, indent=4)
+
+    print(f"Usuário {usuario} cadastrado com sucesso!\n")
 
 MenuPrincipal()
