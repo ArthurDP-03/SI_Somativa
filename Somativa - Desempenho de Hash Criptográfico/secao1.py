@@ -27,44 +27,37 @@ def MenuPrincipal():
     
 def AutenticarUsuario():
     usuario = ""
-    while len(usuario) != 4:  
+    senha = ""  # Inicialize a variável senha antes de usá-la
+    while len(usuario) != 4:
         usuario = input("Digite seu usuário (4 caracteres): ").strip()
         if len(usuario) != 4:
-            print("⚠️  O usuário deve ter 4 caracteres. Tente novamente.")  
-    
-    while len(senha) != 4:      
+            print("O usuário deve ter 4 caracteres. Tente novamente.")
+
+    while len(senha) != 4:
         senha = getpass("Digite a sua senha (4 caracteres): ").strip()
         if len(senha) != 4:
-            print("⚠️  A senha deve ter 4 caracteres. Tente novamente.")
+            print("A senha deve ter 4 caracteres. Tente novamente.")
 
-    if VerificarSenhaUsuario(usuario, senha): 
-        print("\n Login realizado com sucesso!")
-        print("Você está logado como:", usuario)
-        return True
-    else:
-        print("⚠️  Tentativa de login falhou. Tente novamente.\n")
+    caminho_arquivo = os.path.join(os.path.dirname(__file__), "base_usuarios2.json")
+    try:
+        with open(caminho_arquivo, "r") as arquivo_json:
+            usuarios = json.load(arquivo_json)
+    except FileNotFoundError:
+        print("\n❗ Erro: O arquivo 'base_usuarios2.json' não foi encontrado.")
+        return False
+    except json.JSONDecodeError:
+        print("\n❗ Erro: O arquivo 'base_usuarios2.json' está corrompido.")
         return False
 
-def VerificarSenhaUsuario(usuario, senha):
-        try:
-            with open("base_usuarios2.json", "r") as arquivo_json:
-                usuarios = json.load(arquivo_json)  # Carrega os usuários do arquivo JSON
+    # Verifica se o usuário e a senha estão corretos
+    senha_hash = hashlib.sha256(senha.encode()).hexdigest()
+    for u in usuarios:
+        if u["nome_usuario"] == usuario and u["senha"] == senha_hash:
+            print(f"✅ Usuário '{usuario}' autenticado com sucesso!")
+            return True
 
-                # Verifica se o usuário e a senha correspondem
-                usuario_encontrado = next((u for u in usuarios if u["nome_usuario"] == usuario), None)
-                if usuario_encontrado:
-                    if usuario_encontrado["senha"] == senha:
-                        print("Login realizado com sucesso!")
-                        return True
-                    
-                print("\n ⚠️  Usuário ou senha incorretos.") # retorno ambíguo para evitar possiveis casos de 'tenattiva e erro '
-                return False
-        except FileNotFoundError:
-            print("\n❗ Erro: O arquivo 'base_usuarios2.json' não foi encontrado.")
-            return False
-        except json.JSONDecodeError:
-            print("\n❗ Erro: O arquivo 'base_usuarios2.json' está corrompido.")
-            return False
+    print("❌ Usuário ou senha incorretos. Tente novamente.")
+    return False
 
 def CadastrarUsuario():
     usuario = input("Digite seu usuário: ").strip()        
