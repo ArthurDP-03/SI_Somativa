@@ -1,3 +1,4 @@
+# Arthur de Oliveira e Leonardo Stall
 import hashlib
 import time
 import itertools
@@ -7,10 +8,10 @@ from pathlib import Path
 import os
 
 # Caminho para o arquivo JSON com os usuários e hashes
-json_path = Path("/mnt/data/base_usuarios2.json")
+json_path = Path(f"/mnt/data/base_usuarios2b.json")
 
 # Função de força bruta para descobrir senha
-def brute_force_sha256(target_hash, max_len=4, charset=string.ascii_lowercase + string.digits):
+def brute_force_sha256(target_hash, max_len=8, charset=string.ascii_lowercase + string.digits):
     for length in range(1, max_len + 1):
         for attempt in itertools.product(charset, repeat=length):
             candidate = ''.join(attempt)
@@ -20,7 +21,7 @@ def brute_force_sha256(target_hash, max_len=4, charset=string.ascii_lowercase + 
     return None
 
 # Carregar os dados do arquivo
-caminho_arquivo = os.path.join(os.path.dirname(__file__), "base_usuarios2.json")
+caminho_arquivo = os.path.join(os.path.dirname(__file__), "base_usuarios2b.json")
 
 with open(caminho_arquivo, "r") as file:
     usuarios = json.load(file)

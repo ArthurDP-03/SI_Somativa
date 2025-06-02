@@ -28,17 +28,17 @@ def MenuPrincipal():
 def AutenticarUsuario():
     usuario = ""
     senha = ""  # Inicialize a variável senha antes de usá-la
-    while len(usuario) != 4:
-        usuario = input("Digite seu usuário (4 caracteres): ").strip()
-        if len(usuario) != 4:
-            print("O usuário deve ter 4 caracteres. Tente novamente.")
+    while len(usuario) != 8:
+        usuario = input("Digite seu usuário (8 caracteres): ").strip()
+        if len(usuario) != 8:
+            print("O usuário deve ter 8 caracteres. Tente novamente.")
 
-    while len(senha) != 4:
-        senha = getpass("Digite a sua senha (4 caracteres): ").strip()
-        if len(senha) != 4:
-            print("A senha deve ter 4 caracteres. Tente novamente.")
+    while len(senha) != 8:
+        senha = getpass("Digite a sua senha (8 caracteres): ").strip()
+        if len(senha) != 8:
+            print("A senha deve ter 8 caracteres. Tente novamente.")
 
-    caminho_arquivo = os.path.join(os.path.dirname(__file__), "base_usuarios2.json")
+    caminho_arquivo = os.path.join(os.path.dirname(__file__), "base_usuarios2b.json")
     try:
         with open(caminho_arquivo, "r") as arquivo_json:
             usuarios = json.load(arquivo_json)
@@ -60,13 +60,22 @@ def AutenticarUsuario():
     return False
 
 def CadastrarUsuario():
-    usuario = input("Digite seu usuário: ").strip()        
-    senha = getpass("Digite a sua senha: ").strip()
+    usuario = ""
+    senha = ""  
+    while len(usuario) != 8:
+        usuario = input("Digite seu usuário (8 caracteres): ").strip()
+        if len(usuario) != 8:
+            print("O usuário deve ter 8 caracteres. Tente novamente.")
+
+    while len(senha) != 8:
+        senha = getpass("Digite a sua senha (8 caracteres): ").strip()
+        if len(senha) != 8:
+            print("A senha deve ter 8 caracteres. Tente novamente.")
 
     senha_hash = hashlib.sha256(senha.encode()).hexdigest()
 
     # Caminho correto baseado na mesma pasta do script
-    caminho_arquivo = os.path.join(os.path.dirname(__file__), "base_usuarios2.json")
+    caminho_arquivo = os.path.join(os.path.dirname(__file__), "base_usuarios2b.json")
 
     try:
         with open(caminho_arquivo, "r") as arquivo_json:
