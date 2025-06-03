@@ -1,4 +1,5 @@
 # Arthur de Oliveira e Leonardo Stall
+#Grupo 10
 import hashlib
 import time
 import itertools

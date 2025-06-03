@@ -1,5 +1,5 @@
 # Arthur de Oliveira e Leonardo Stall
-
+#Grupo 10
 import json
 from getpass import getpass
 import hashlib
